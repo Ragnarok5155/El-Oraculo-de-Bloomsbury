@@ -3,22 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Oráculo de Bloomsbury — Diagnóstico</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<title>El Oráculo de Bloomsbury — Guía para Traders</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #1a1a24;
-    --border: #2a2a3a;
-    --accent: #00c878;
-    --accent2: #ff5050;
-    --accent3: #ffdc50;
-    --accent4: #00aaff;
-    --text: #e8e8f0;
-    --muted: #6a6a88;
-    --glow: rgba(0,200,120,0.15);
+    --bg: #f5f3ef;
+    --white: #ffffff;
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-muted: #8888aa;
+    --green: #1a8a5a;
+    --green-bg: #edf7f2;
+    --green-border: #b8e0cc;
+    --red: #c0392b;
+    --red-bg: #fdf2f1;
+    --red-border: #f0bfbb;
+    --yellow: #d4820a;
+    --yellow-bg: #fdf6e8;
+    --yellow-border: #f0d89a;
+    --blue: #1a5fa8;
+    --blue-bg: #eef4fc;
+    --blue-border: #b8d4f0;
+    --border: #ddd8cc;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
   }
 
   * {
@@ -27,954 +35,1295 @@
     box-sizing: border-box;
   }
 
-  html {
+  html,
+  body {
     width: 100%;
     overflow-x: hidden;
   }
 
   body {
     background: var(--bg);
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,200,120,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,200,120,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrapper {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* HEADER */
-  header {
-    border-left: 3px solid var(--accent);
-    padding-left: 20px;
-    margin-bottom: 56px;
-    animation: fadeIn 0.6s ease both;
-  }
-
-  .label {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 5vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-
-  h1 span {
-    color: var(--accent);
-  }
-
-  .subtitle {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
-
-  /* SECTION */
-  section {
-    margin-bottom: 40px;
-    animation: fadeUp 0.5s ease both;
-  }
-
-  section:nth-child(2) { animation-delay: 0.1s; }
-  section:nth-child(3) { animation-delay: 0.15s; }
-  section:nth-child(4) { animation-delay: 0.2s; }
-  section:nth-child(5) { animation-delay: 0.25s; }
-  section:nth-child(6) { animation-delay: 0.3s; }
-  section:nth-child(7) { animation-delay: 0.35s; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .section-num {
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--text);
-    flex-shrink: 0;
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* CARD */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 24px;
-  }
-
-  .card p {
-    font-size: 13px;
-    line-height: 1.8;
-    color: #b0b0c8;
-  }
-
-  .card p + p {
-    margin-top: 12px;
-  }
-
-  code {
-    color: var(--accent3);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.92em;
-  }
-
-  /* FLOW DIAGRAM */
-  .flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .flow-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    position: relative;
-  }
-
-  .flow-step:first-child {
-    border-radius: 6px 6px 0 0;
-  }
-
-  .flow-step:last-child {
-    border-radius: 0 0 6px 6px;
-  }
-
-  .flow-step:not(:last-child) {
-    border-bottom: none;
-  }
-
-  .flow-step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    left: 30px;
-    width: 1px;
-    height: 12px;
-    background: var(--accent);
-    z-index: 2;
-  }
-
-  .flow-num {
-    min-width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--glow);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .flow-content strong {
-    display: block;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-
-  .flow-content p {
-    font-size: 12px;
-    color: var(--muted);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
     line-height: 1.6;
   }
 
-  .flow-content .tag {
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: white;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
     display: inline-block;
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 3px;
-    margin-top: 6px;
-    letter-spacing: 0.05em;
-  }
-
-  .tag-rsi {
-    background: rgba(0,200,120,0.15);
-    color: var(--accent);
-    border: 1px solid rgba(0,200,120,0.3);
-  }
-
-  .tag-macd {
-    background: rgba(0,170,255,0.15);
-    color: var(--accent4);
-    border: 1px solid rgba(0,170,255,0.3);
-  }
-
-  .tag-atr {
-    background: rgba(255,220,80,0.12);
-    color: var(--accent3);
-    border: 1px solid rgba(255,220,80,0.3);
-  }
-
-  .tag-signal {
-    background: rgba(255,80,80,0.12);
-    color: var(--accent2);
-    border: 1px solid rgba(255,80,80,0.3);
-  }
-
-  /* COMPONENTS GRID */
-  .comp-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 12px;
-  }
-
-  .comp-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 16px 20px;
-  }
-
-  .comp-card .comp-title {
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: #88ccaa;
+    background: rgba(255,255,255,0.08);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 6vw, 56px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: white;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #6adba8;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: #aab0c8;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* WRAPPER */
+  .wrapper {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-top: 52px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  /* CARD BASE */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: var(--shadow);
+  }
+
+  .card p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.75;
+  }
+
+  .card p + p {
+    margin-top: 14px;
+  }
+
+  /* ANALOGY BOX */
+  .analogy {
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-border);
+    border-radius: 12px;
+    padding: 22px 26px;
+    margin-top: 16px;
+  }
+
+  .analogy-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--yellow);
     margin-bottom: 8px;
   }
 
-  .comp-card p {
-    font-size: 12px;
-    color: var(--muted);
+  .analogy p {
+    font-size: 14px;
+    color: #7a5a10;
+    line-height: 1.7;
+  }
+
+  /* HOW IT WORKS STEPS */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .step {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    box-shadow: var(--shadow);
+  }
+
+  .step-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .step-icon.green {
+    background: var(--green-bg);
+  }
+
+  .step-icon.blue {
+    background: var(--blue-bg);
+  }
+
+  .step-icon.yellow {
+    background: var(--yellow-bg);
+  }
+
+  .step-icon.red {
+    background: var(--red-bg);
+  }
+
+  .step-icon.purple {
+    background: #f0eef8;
+  }
+
+  .step-body h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .step-body p {
+    font-size: 14px;
+    color: var(--ink-light);
     line-height: 1.65;
   }
 
-  .c-green .comp-title { color: var(--accent); }
-  .c-blue .comp-title { color: var(--accent4); }
-  .c-yellow .comp-title { color: var(--accent3); }
-  .c-red .comp-title { color: var(--accent2); }
-
-  .c-green { border-left: 2px solid var(--accent); }
-  .c-blue { border-left: 2px solid var(--accent4); }
-  .c-yellow { border-left: 2px solid var(--accent3); }
-  .c-red { border-left: 2px solid var(--accent2); }
-
-  /* TIMEFRAME TABLE */
-  .tf-table-wrap {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .tf-table {
-    width: 100%;
-    border-collapse: collapse;
+  .step-note {
+    margin-top: 8px;
     font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
   }
 
-  .tf-table th {
-    text-align: left;
-    padding: 10px 16px;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: var(--surface2);
-    border-bottom: 1px solid var(--border);
+  .note-green {
+    background: var(--green-bg);
+    color: var(--green);
   }
 
-  .tf-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    color: #b0b0c8;
-    vertical-align: top;
+  .note-yellow {
+    background: var(--yellow-bg);
+    color: var(--yellow);
+  }
+
+  .note-blue {
+    background: var(--blue-bg);
+    color: var(--blue);
+  }
+
+  .note-red {
+    background: var(--red-bg);
+    color: var(--red);
+  }
+
+  /* INDICATORS EXPLAINED */
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .indicator-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .indicator-card .ind-emoji {
+    font-size: 26px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .indicator-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .indicator-card p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  .indicator-card .ind-simple {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
     line-height: 1.5;
   }
 
-  .tf-table tr:last-child td {
+  /* DIVERGENCE EXPLAINER */
+  .div-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .div-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .div-row:last-child {
     border-bottom: none;
   }
 
-  .tf-table tr:hover td {
-    background: var(--surface2);
+  .div-cell {
+    padding: 18px 22px;
   }
 
-  .badge {
-    display: inline-block;
-    font-size: 10px;
-    padding: 2px 10px;
-    border-radius: 20px;
+  .div-cell:first-child {
+    border-right: 1px solid var(--border);
+  }
+
+  .div-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .div-badge {
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .div-badge.bull {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+
+  .div-badge.bear {
+    background: var(--red-bg);
+    color: var(--red);
+  }
+
+  .div-cell p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  .div-visual {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .div-visual.bull {
+    background: var(--green-bg);
+    color: var(--green);
+  }
+
+  .div-visual.bear {
+    background: var(--red-bg);
+    color: var(--red);
+  }
+
+  /* MOAI EXPLAINER */
+  .moai-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+
+  .moai-symbol {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 12px;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.06);
+    }
+  }
+
+  .moai-box h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .moai-box p {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .moai-variants {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+    text-align: left;
+  }
+
+  .variant-card {
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid;
+  }
+
+  .variant-card .v-name {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .variant-card p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .v-base {
+    background: #f8f8ff;
+    border-color: #d0d0ee;
+  }
+
+  .v-base .v-name {
+    color: #444488;
+  }
+
+  .v-base p {
+    color: #666688;
+  }
+
+  .v-a {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+  }
+
+  .v-a .v-name {
+    color: var(--green);
+  }
+
+  .v-a p {
+    color: #2a7050;
+  }
+
+  .v-b {
+    background: var(--blue-bg);
+    border-color: var(--blue-border);
+  }
+
+  .v-b .v-name {
+    color: var(--blue);
+  }
+
+  .v-b p {
+    color: #1a4a88;
+  }
+
+  .v-c {
+    background: var(--yellow-bg);
+    border-color: var(--yellow-border);
+  }
+
+  .v-c .v-name {
+    color: var(--yellow);
+  }
+
+  .v-c p {
+    color: #7a5a10;
+  }
+
+  /* TIMEFRAME */
+  .tf-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tf-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .tf-label {
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 36px;
+    color: var(--ink);
+    padding-top: 2px;
+  }
+
+  .tf-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
 
-  .badge-ideal {
-    background: rgba(0,200,120,0.2);
-    color: var(--accent);
-    border: 1px solid rgba(0,200,120,0.4);
+  .tf-ideal {
+    background: var(--green-bg);
+    color: var(--green);
+    border: 1px solid var(--green-border);
   }
 
-  .badge-ok {
-    background: rgba(255,220,80,0.15);
-    color: var(--accent3);
-    border: 1px solid rgba(255,220,80,0.35);
+  .tf-ok {
+    background: var(--yellow-bg);
+    color: var(--yellow);
+    border: 1px solid var(--yellow-border);
   }
 
-  .badge-no {
-    background: rgba(255,80,80,0.12);
-    color: var(--accent2);
-    border: 1px solid rgba(255,80,80,0.3);
+  .tf-no {
+    background: var(--red-bg);
+    color: var(--red);
+    border: 1px solid var(--red-border);
+  }
+
+  .tf-card p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.6;
+    flex: 1;
   }
 
   /* PROS CONS */
   .pros-cons {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .pros-block,
-  .cons-block {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 20px;
+    gap: 14px;
   }
 
   .pros-block {
-    border-top: 2px solid var(--accent);
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    padding: 22px;
   }
 
   .cons-block {
-    border-top: 2px solid var(--accent2);
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    border-radius: 12px;
+    padding: 22px;
   }
 
   .block-title {
-    font-family: 'Syne', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .pros-block .block-title {
-    color: var(--accent);
+    color: var(--green);
   }
 
   .cons-block .block-title {
-    color: var(--accent2);
+    color: var(--red);
   }
 
   .item-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 11px;
   }
 
   .item-list li {
-    font-size: 12px;
-    color: #b0b0c8;
-    line-height: 1.55;
-    padding-left: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    padding-left: 18px;
     position: relative;
+  }
+
+  .pros-block .item-list li {
+    color: #1a5a3a;
+  }
+
+  .cons-block .item-list li {
+    color: #8a1a10;
   }
 
   .item-list li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 7px;
-    width: 6px;
-    height: 6px;
+    top: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
   }
 
   .pros-block .item-list li::before {
-    background: var(--accent);
+    background: var(--green);
   }
 
   .cons-block .item-list li::before {
-    background: var(--accent2);
+    background: var(--red);
   }
 
-  /* VERDICT */
-  .verdict-box {
-    background: var(--surface);
+  /* HOW TO READ */
+  .read-steps {
+    counter-reset: step-counter;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .read-step {
+    background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 28px;
+    border-radius: 10px;
+    padding: 16px 20px 16px 64px;
     position: relative;
-    overflow: hidden;
+    box-shadow: var(--shadow);
+    counter-increment: step-counter;
   }
 
-  .verdict-box::before {
-    content: '';
+  .read-step::before {
+    content: counter(step-counter);
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent4), var(--accent3));
-  }
-
-  .verdict-box p {
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: var(--ink);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 13px;
-    line-height: 1.85;
-    color: #b0b0c8;
+    font-weight: 700;
   }
 
-  .verdict-box p + p {
-    margin-top: 12px;
+  .read-step h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
   }
 
-  .verdict-box strong {
-    color: var(--text);
-  }
-
-  .verdict-highlight {
-    margin-top: 20px;
-    padding: 14px 18px;
-    background: var(--glow);
-    border: 1px solid rgba(0,200,120,0.25);
-    border-radius: 4px;
-    font-size: 12px;
-    color: var(--accent);
+  .read-step p {
+    font-size: 13px;
+    color: var(--ink-light);
     line-height: 1.6;
   }
 
+  /* VERDICT */
+  .verdict {
+    background: var(--ink);
+    border-radius: 14px;
+    padding: 36px;
+    color: white;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  }
+
+  .verdict h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .verdict p {
+    font-size: 14px;
+    color: #aab0c8;
+    line-height: 1.78;
+  }
+
+  .verdict p + p {
+    margin-top: 12px;
+  }
+
+  .verdict strong {
+    color: white;
+  }
+
+  .verdict-tip {
+    margin-top: 22px;
+    padding: 16px 20px;
+    background: rgba(106,219,168,0.12);
+    border: 1px solid rgba(106,219,168,0.25);
+    border-radius: 8px;
+    font-size: 13px;
+    color: #6adba8;
+    line-height: 1.65;
+  }
+
+  /* SEPARATOR */
+  .sep {
+    height: 1px;
+    background: var(--border);
+    margin: 48px 0 0;
+  }
+
   footer {
-    margin-top: 60px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
     text-align: center;
+    padding: 28px 0 0;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
   }
 
-  /* ANIMATIONS */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+  /* ============================= */
+  /* RESPONSIVE ORIGINAL */
+  /* ============================= */
 
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
+  @media (max-width: 560px) {
+    .indicator-grid {
+      grid-template-columns: 1fr;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .pros-cons {
+      grid-template-columns: 1fr !important;
     }
   }
 
-  /* =========================
-     RESPONSIVE PATCH
-     ========================= */
-
-  @media (max-width: 700px) {
-    .tf-table,
-    .tf-table thead,
-    .tf-table tbody,
-    .tf-table th,
-    .tf-table td,
-    .tf-table tr {
-      display: block;
-      width: 100%;
-    }
-
-    .tf-table thead {
-      display: none;
-    }
-
-    .tf-table tr {
-      padding: 16px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-
-    .tf-table tr:last-child {
-      border-bottom: none;
-    }
-
-    .tf-table td {
-      padding: 0;
-      border-bottom: none;
-    }
-
-    .tf-table td:first-child {
-      margin-bottom: 10px;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .tf-table td:nth-child(2) {
-      margin-bottom: 12px;
-    }
-
-    .tf-table td:nth-child(3) {
-      font-size: 11px;
-      line-height: 1.7;
-      color: #b0b0c8;
-    }
-
-    .tf-table tr:hover td {
-      background: transparent;
-    }
-
-    .badge {
-      font-size: 9px;
-      padding: 3px 9px;
+  @media (max-width: 480px) {
+    .moai-variants {
+      grid-template-columns: 1fr;
     }
   }
+
+  /* ============================= */
+  /* MOBILE RESPONSIVE HARDENING */
+  /* ============================= */
 
   @media (max-width: 640px) {
+    .hero {
+      padding: 44px 20px 40px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 12vw, 46px);
+    }
+
+    .hero p {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
     .wrapper {
-      padding: 36px 16px 56px;
+      padding: 0 16px 64px;
     }
 
-    header {
-      padding-left: 14px;
-      margin-bottom: 40px;
+    .section {
+      margin-top: 42px;
     }
 
-    .label {
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      line-height: 1.5;
-    }
-
-    h1 {
-      font-size: clamp(30px, 11vw, 42px);
-      line-height: 0.98;
-    }
-
-    .subtitle {
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    section {
-      margin-bottom: 34px;
-    }
-
-    .section-header {
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-
-    .section-num {
-      padding-top: 4px;
-      min-width: 24px;
-    }
-
-    h2 {
-      font-size: 16px;
-      line-height: 1.25;
-      flex-shrink: 1;
-    }
-
-    .section-line {
-      display: none;
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 16px;
     }
 
     .card,
-    .verdict-box,
+    .analogy,
+    .indicator-card,
+    .moai-box,
+    .pros-block,
+    .cons-block,
+    .verdict {
+      padding: 20px;
+    }
+
+    .card p,
+    .analogy p,
+    .verdict p {
+      font-size: 14px;
+    }
+
+    .div-row {
+      grid-template-columns: 1fr;
+    }
+
+    .div-cell {
+      padding: 18px 20px;
+    }
+
+    .div-cell:first-child {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .div-row:last-child .div-cell:first-child {
+      border-bottom: none;
+    }
+
+    .div-visual {
+      white-space: normal;
+      word-break: normal;
+    }
+
+    .tf-card {
+      flex-wrap: wrap;
+      gap: 10px 12px;
+      padding: 16px;
+    }
+
+    .tf-label {
+      min-width: auto;
+    }
+
+    .tf-badge {
+      white-space: normal;
+    }
+
+    .tf-card p {
+      flex-basis: 100%;
+    }
+
+    .read-step {
+      padding: 16px 18px 16px 58px;
+    }
+
+    .read-step::before {
+      left: 16px;
+      width: 30px;
+      height: 30px;
+    }
+
+    footer {
+      line-height: 1.7;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 38px 18px 34px;
+    }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      padding: 5px 12px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+    }
+
+    .wrapper {
+      padding: 0 14px 56px;
+    }
+
+    .section-title {
+      font-size: 22px;
+    }
+
+    .card,
+    .analogy,
+    .indicator-card,
+    .moai-box,
+    .pros-block,
+    .cons-block,
+    .verdict {
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .step {
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .step-icon {
+      width: 42px;
+      height: 42px;
+    }
+
+    .step-body h3 {
+      font-size: 14px;
+    }
+
+    .step-body p {
+      font-size: 13px;
+    }
+
+    .moai-symbol {
+      font-size: 48px;
+    }
+
+    .moai-box h3 {
+      font-size: 20px;
+    }
+
+    .variant-card {
+      padding: 14px;
+    }
+
+    .read-step {
+      padding: 54px 16px 16px;
+    }
+
+    .read-step::before {
+      top: 16px;
+      left: 16px;
+      transform: none;
+    }
+
     .pros-block,
     .cons-block {
       padding: 18px;
     }
 
-    .card p,
-    .verdict-box p {
-      font-size: 12px;
-      line-height: 1.75;
+    .verdict {
+      padding: 24px 20px;
     }
 
-    .flow-step {
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .flow-step:not(:last-child)::after {
-      left: 29px;
-    }
-
-    .flow-content strong {
-      font-size: 12px;
-      line-height: 1.35;
-    }
-
-    .flow-content p {
-      font-size: 11px;
-      line-height: 1.65;
-    }
-
-    .flow-content .tag {
-      margin-top: 8px;
-      margin-right: 4px;
-    }
-
-    .comp-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .comp-card {
-      padding: 16px;
-    }
-
-    .comp-card .comp-title {
-      font-size: 10px;
-      line-height: 1.45;
-    }
-
-    .pros-cons {
-      grid-template-columns: 1fr;
-    }
-
-    .item-list li {
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .verdict-highlight {
-      padding: 14px;
-      font-size: 11px;
-      line-height: 1.65;
-    }
-
-    footer {
-      font-size: 9px;
-      line-height: 1.6;
-      letter-spacing: 0.08em;
+    .verdict h3 {
+      font-size: 21px;
     }
   }
 
   @media (max-width: 360px) {
-    .wrapper {
-      padding-left: 14px;
-      padding-right: 14px;
+    .hero h1 {
+      font-size: 34px;
     }
 
-    .flow-step {
-      padding: 14px;
-    }
-
-    .flow-num {
-      min-width: 26px;
-      height: 26px;
-      font-size: 10px;
+    .section-title {
+      font-size: 21px;
     }
 
     .card,
-    .verdict-box,
+    .analogy,
+    .indicator-card,
+    .moai-box,
     .pros-block,
     .cons-block,
-    .comp-card {
-      padding: 15px;
+    .verdict {
+      padding: 16px;
+    }
+
+    .tf-card {
+      padding: 14px;
+    }
+
+    .tf-badge {
+      font-size: 10px;
+      padding: 3px 10px;
+    }
+
+    .item-list li {
+      font-size: 12.5px;
     }
   }
 </style>
 </head>
 
 <body>
+
+<div class="hero">
+  <span class="hero-eyebrow">Guía completa para traders</span>
+  <h1>El Oráculo de<br><em>Bloomsbury</em></h1>
+  <p>Entendé cómo funciona este indicador, para qué sirve, cuándo usarlo y cuáles son sus límites — sin tecnicismos innecesarios.</p>
+</div>
+
 <div class="wrapper">
 
-  <header>
-    <div class="label">// diagnóstico técnico — Pine Script v6</div>
-    <h1>El Oráculo de<br><span>Bloomsbury</span></h1>
-    <p class="subtitle">Indicador de confluencia | RSI + MACD + ATR + MTF | Swing Trading</p>
-  </header>
-
-  <!-- QUÉ HACE -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2>¿Qué hace este indicador?</h2>
-      <div class="section-line"></div>
-    </div>
+  <!-- QUÉ ES -->
+  <div class="section">
+    <div class="section-label">Punto de partida</div>
+    <div class="section-title">¿Qué es este indicador?</div>
 
     <div class="card">
       <p>
-        El Oráculo de Bloomsbury es un <strong>detector de confluencias entre divergencias de RSI y MACD</strong>. Su función central es identificar momentos donde ambos osciladores generan divergencias en la misma dirección al mismo tiempo, y marcar esas confluencias con el símbolo 🗿 (el "Moái").
+        El Oráculo de Bloomsbury es una herramienta visual para TradingView que te ayuda a identificar <strong>momentos donde el mercado podría estar perdiendo fuerza bajista y preparándose para subir</strong>. Lo hace combinando señales de dos indicadores clásicos — el RSI y el MACD — y marcando con un 🗿 (el "Moái") cuando ambos coinciden.
       </p>
-
       <p>
-        En términos simples: no busca setups por precio solo, sino por <strong>momento en que el momentum diverge del precio en dos osciladores simultáneamente</strong>. A esto le suma un dashboard multi-timeframe (actual / 4H / 1D / 1W), clasificación de régimen de mercado, y un sistema de seguimiento de performance histórica de las señales.
+        Además de esa señal principal, también muestra información de contexto: cómo está el mercado en temporalidades más largas, cuál es el "estado" actual del mercado, y si las señales pasadas funcionaron o no.
       </p>
     </div>
-  </section>
 
-  <!-- CÓMO FUNCIONA -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2>Cómo funciona — flujo lógico</h2>
-      <div class="section-line"></div>
+    <div class="analogy">
+      <div class="analogy-title">💡 Analogía simple</div>
+      <p>
+        Imaginá que querés cruzar una calle. El RSI te dice si hay poco tráfico. El MACD te confirma que los autos que vienen van frenando. El Oráculo espera que <em>ambos</em> te digan que es seguro antes de darte luz verde. Un solo semáforo verde no alcanza — necesitás que los dos coincidan.
+      </p>
     </div>
+  </div>
 
-    <div class="flow">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <div class="flow-content">
-          <strong>Detección de pivots de precio</strong>
-          <p>Usa <code>ta.pivotlow</code> y <code>ta.pivothigh</code> para identificar mínimos y máximos estructurales confirmados. La confirmación requiere N barras a izquierda y derecha (configurable, default 5+5). Esto introduce un lag inherente de al menos 5 barras.</p>
-          <span class="tag tag-signal">Lag estructural obligatorio</span>
-        </div>
+  <!-- LOS INGREDIENTES -->
+  <div class="section">
+    <div class="section-label">Los componentes</div>
+    <div class="section-title">¿Qué hay dentro del indicador?</div>
+
+    <div class="indicator-grid">
+      <div class="indicator-card">
+        <span class="ind-emoji">📊</span>
+        <h3>RSI (Relative Strength Index)</h3>
+        <p>Mide si un activo está "sobrevendido" (muy castigado) o "sobrecomprado" (muy inflado). Va de 0 a 100. Por debajo de 30 se considera sobrevendido, por encima de 70 sobrecomprado.</p>
+        <div class="ind-simple note-green">Lo que busca el Oráculo: que el RSI muestre señales de recuperación mientras el precio todavía baja.</div>
       </div>
 
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <div class="flow-content">
-          <strong>Comparación de osciladores en pivots</strong>
-          <p>En cada pivot confirmado, compara el valor del RSI y del MACD Line con el pivot anterior. Si el precio hace mínimo más bajo pero el oscilador hace mínimo más alto → divergencia alcista regular. La lógica inversa aplica para bears.</p>
-          <span class="tag tag-rsi">RSI</span>
-          <span class="tag tag-macd">MACD Line</span>
-        </div>
+      <div class="indicator-card">
+        <span class="ind-emoji">📈</span>
+        <h3>MACD</h3>
+        <p>Compara dos promedios móviles del precio para detectar cambios de momentum (fuerza del movimiento). Cuando el MACD se separa de su línea signal hacia arriba, indica momentum alcista.</p>
+        <div class="ind-simple note-blue">Lo que busca el Oráculo: que el MACD también muestre mejora de momentum mientras el precio baja.</div>
       </div>
 
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <div class="flow-content">
-          <strong>Ventana de vigencia — lookback display</strong>
-          <p>Las divergencias confirmadas se consideran "recientes" durante X barras (default 30). Solo dentro de esa ventana se evalúa si RSI y MACD divergieron en la misma dirección para calificar como confluencia.</p>
-          <span class="tag tag-atr">Ventana configurable</span>
-        </div>
+      <div class="indicator-card">
+        <span class="ind-emoji">📏</span>
+        <h3>ATR (Average True Range)</h3>
+        <p>Mide cuánto se mueve el precio en promedio por vela. El indicador lo usa para saber si el mercado está en un momento de alta o baja volatilidad, y para posicionar el Moái en el gráfico.</p>
+        <div class="ind-simple note-yellow">Clasifica el mercado en: Alta volatilidad / Normal / Baja volatilidad.</div>
       </div>
 
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <div class="flow-content">
-          <strong>Señal Moái — primera confluencia nueva</strong>
-          <p>El 🗿 aparece solo en la primera barra donde se activa la confluencia alcista, no en cada barra mientras dura. Hay 4 versiones: Base (confluencia pura), Variante A (filtro defensivo RSI/MACD/EMA50), Variante B (confirmación estructural de precio), Variante C (anti-cuchillo-cayendo).</p>
-          <span class="tag tag-signal">Edge: 1 señal por evento</span>
-        </div>
-      </div>
-
-      <div class="flow-step">
-        <div class="flow-num">5</div>
-        <div class="flow-content">
-          <strong>Dashboard MTF + régimen + performance</strong>
-          <p>Muestra el estado de divergencias y Moáis en 4 timeframes: actual, 4H, 1D y 1W. Clasifica el régimen de mercado en 14 estados posibles. Acumula estadísticas de win rate y retorno promedio de señales históricas completadas.</p>
-          <span class="tag tag-atr">ATR para régimen</span>
-        </div>
+      <div class="indicator-card">
+        <span class="ind-emoji">📍</span>
+        <h3>Pivots de precio</h3>
+        <p>Son los mínimos y máximos "confirmados" del precio. Para confirmar un pivot, el indicador espera que pasen varias velas después del punto. Esto introduce un pequeño retraso — pero es necesario para no dar falsas señales.</p>
+        <div class="ind-simple note-red">Importante: la confirmación tarda 5 velas. En 1H, eso son 5 horas de retraso.</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- COMPONENTES -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>Componentes clave</h2>
-      <div class="section-line"></div>
+  <!-- QUÉ ES DIVERGENCIA -->
+  <div class="section">
+    <div class="section-label">Concepto clave</div>
+    <div class="section-title">¿Qué es una divergencia?</div>
+
+    <div class="card" style="margin-bottom: 14px;">
+      <p>
+        Una divergencia ocurre cuando el <strong>precio y un oscilador (RSI o MACD) se mueven en direcciones opuestas</strong>. Es como si el precio dijera una cosa y el indicador dijera otra — esa contradicción es la señal.
+      </p>
     </div>
 
-    <div class="comp-grid">
-      <div class="comp-card c-green">
-        <div class="comp-title">RSI (14) + Smooth</div>
-        <p>Detecta divergencias regulares y ocultas. El suavizado (SMA 14 del RSI) se usa para clasificar momentum en el dashboard, no para las divergencias en sí.</p>
+    <div class="div-box">
+      <div class="div-row">
+        <div class="div-cell">
+          <div class="div-header">
+            <span class="div-badge bull">ALCISTA (Bull)</span>
+          </div>
+          <p>El precio hace un mínimo <strong>más bajo</strong> que el anterior, pero el RSI o MACD hace un mínimo <strong>más alto</strong>. El precio sigue cayendo pero los osciladores ya no acompañan la caída. Es una señal de que la presión vendedora se está agotando.</p>
+          <div class="div-visual bull">
+            Precio: ↓↓ más bajo &nbsp;|&nbsp; Oscilador: ↑ más alto
+          </div>
+        </div>
+
+        <div class="div-cell">
+          <div class="div-header">
+            <span class="div-badge bear">BAJISTA (Bear)</span>
+          </div>
+          <p>El precio hace un máximo <strong>más alto</strong> que el anterior, pero el RSI o MACD hace un máximo <strong>más bajo</strong>. El precio sigue subiendo pero los osciladores ya no acompañan la suba. Señal de que la presión compradora se está debilitando.</p>
+          <div class="div-visual bear">
+            Precio: ↑↑ más alto &nbsp;|&nbsp; Oscilador: ↓ más bajo
+          </div>
+        </div>
       </div>
 
-      <div class="comp-card c-blue">
-        <div class="comp-title">MACD Line (12/26/9)</div>
-        <p>Divergencias calculadas sobre MACD Line, no histograma. Decisión correcta: la línea es más suave y genera menos ruido que el histograma en divergencias.</p>
-      </div>
-
-      <div class="comp-card c-yellow">
-        <div class="comp-title">ATR (14) — Régimen</div>
-        <p>Clasifica volatilidad como High/Normal/Low comparando ATR% actual vs. SMA del ATR% histórico. Alimenta el clasificador de régimen de mercado.</p>
-      </div>
-
-      <div class="comp-card c-red">
-        <div class="comp-title">Pivots (5+5)</div>
-        <p>Mínimos y máximos confirmados estructurales. Con 5 barras de cada lado introduce un lag de 5 velas que es <strong>no opcional</strong> — es el costo de confirmar el pivot.</p>
-      </div>
-
-      <div class="comp-card c-green">
-        <div class="comp-title">Dashboard MTF</div>
-        <p>4 timeframes: actual, 4H, 1D, 1W. Usa request.security sin lookahead — correcto para evitar repainting. Muestra antigüedad de señales con semáforo de colores.</p>
-      </div>
-
-      <div class="comp-card c-blue">
-        <div class="comp-title">Performance tracker</div>
-        <p>Acumula % de barras alcistas y retorno promedio X barras después de cada señal. Útil para evaluar las 4 variantes históricamente en el activo y TF actual.</p>
+      <div class="div-row">
+        <div class="div-cell" style="grid-column: 1 / -1; background: #fafaf8;">
+          <p style="font-size: 13px; color: var(--ink-muted);">
+            <strong style="color: var(--ink);">Lo que hace el Oráculo:</strong> espera que TANTO el RSI como el MACD muestren la misma divergencia al mismo tiempo. Eso se llama "confluencia" y es mucho más confiable que una divergencia aislada en un solo indicador.
+          </p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- EL MOAI -->
+  <div class="section">
+    <div class="section-label">La señal principal</div>
+    <div class="section-title">El 🗿 Moái — ¿qué significa cuando aparece?</div>
+
+    <div class="moai-box">
+      <span class="moai-symbol">🗿</span>
+      <h3>Cuando ves el Moái, el indicador detectó una confluencia alcista</h3>
+      <p>
+        Es decir: tanto el RSI como el MACD muestran divergencias alcistas al mismo tiempo. El Moái aparece <strong>una sola vez por evento</strong> — en la primera vela donde se activa. No se repite mientras dura la señal.
+      </p>
+
+      <div class="moai-variants">
+        <div class="variant-card v-base">
+          <div class="v-name">🗿 BASE — Señal pura</div>
+          <p>RSI + MACD con divergencia alcista simultánea. Es la señal más frecuente pero también la menos filtrada. Más señales, más falsas.</p>
+        </div>
+
+        <div class="variant-card v-a">
+          <div class="v-name">🗿 VARIANTE A — Filtro defensivo</div>
+          <p>Agrega que el RSI esté por encima de 45, o el MACD esté mejorando, o el precio esté sobre la EMA 50. Descarta contextos muy bajistas.</p>
+        </div>
+
+        <div class="variant-card v-b">
+          <div class="v-name">🗿 VARIANTE B — Confirmación de precio</div>
+          <p>Exige que el precio ya haya cerrado por encima de un máximo reciente. Más conservadora. Menos señales pero con más confirmación estructural.</p>
+        </div>
+
+        <div class="variant-card v-c">
+          <div class="v-name">🗿 VARIANTE C — Anti-caída libre</div>
+          <p>Bloquea la señal si el mercado está en "modo cuchillo cayendo" (tendencia bajista fuerte + RSI bajo + MACD negativo). Evita comprar en caídas libres.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="analogy" style="margin-top: 14px;">
+      <div class="analogy-title">💡 ¿Cuál variante usar?</div>
+      <p>Si estás empezando, usá la <strong>Variante C</strong>. Te protege del error más común de los principiantes: comprar en medio de una caída fuerte pensando que "ya tocó piso". Las variantes más restrictivas dan menos señales pero más limpias.</p>
+    </div>
+  </div>
+
+  <!-- CÓMO FUNCIONA PASO A PASO -->
+  <div class="section">
+    <div class="section-label">El proceso completo</div>
+    <div class="section-title">¿Cómo piensa el indicador?</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-icon green">📌</div>
+        <div class="step-body">
+          <h3>Paso 1 — Detecta pivots de precio</h3>
+          <p>Busca mínimos y máximos "reales" del mercado. Para considerar un mínimo válido, espera que pasen 5 velas a cada lado. Esto es como esperar a que el precio "confirme" que ya no sigue bajando antes de marcarlo como piso.</p>
+          <span class="step-note note-yellow">⚠️ Esto introduce un retraso de 5 velas. Es el precio a pagar por menos falsas señales.</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon blue">🔍</div>
+        <div class="step-body">
+          <h3>Paso 2 — Compara con el pivot anterior</h3>
+          <p>¿El nuevo mínimo de precio es más bajo que el anterior? ¿Y el RSI en ese momento es más alto que antes? Si esto pasa, hay una divergencia alcista de RSI. Lo mismo hace con el MACD.</p>
+          <span class="step-note note-green">Cada divergencia se guarda en memoria durante un tiempo configurable (por defecto, 30 velas).</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon yellow">⚡</div>
+        <div class="step-body">
+          <h3>Paso 3 — Espera que coincidan</h3>
+          <p>Solo cuando tanto el RSI como el MACD tienen divergencias alcistas activas al mismo tiempo, se considera "confluencia". Una sola no alcanza. Es más difícil que las dos coincidan, por eso las señales son menos frecuentes.</p>
+          <span class="step-note note-blue">Esto filtra gran parte del ruido del mercado.</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon red">🗿</div>
+        <div class="step-body">
+          <h3>Paso 4 — Aparece el Moái</h3>
+          <p>En la primera vela donde se activa la confluencia, aparece el 🗿 debajo del precio. El indicador aplica el filtro de la variante que hayas seleccionado (Base, A, B o C) antes de dibujarlo.</p>
+          <span class="step-note note-red">El Moái NO incluye stop loss ni take profit. Eso es tu trabajo como trader.</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-icon purple">📊</div>
+        <div class="step-body">
+          <h3>Paso 5 — Los dashboards dan contexto</h3>
+          <p>El indicador muestra tableros informativos: el estado del mercado en 4 temporalidades (tu TF actual, 4H, 1D, 1W), el "régimen" actual (si está en tendencia, rango, pánico, etc.) y estadísticas históricas de cuántas veces las señales funcionaron.</p>
+          <span class="step-note note-green">El dashboard de performance es muy valioso: te dice si el Moái "funciona" en el activo que estás mirando.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÓMO LEER LOS DASHBOARDS -->
+  <div class="section">
+    <div class="section-label">Interpretación práctica</div>
+    <div class="section-title">¿Cómo leer los tableros?</div>
+
+    <div class="read-steps">
+      <div class="read-step">
+        <h4>BLOOMSBURY CONFLUENCE — El más importante para entrada</h4>
+        <p>Muestra si hay confluencia activa (RSI + MACD en la misma dirección), el régimen del mercado (ej: "Alcista", "Cuchillo cayendo", "Rango") y el sesgo operativo recomendado ("Buscando LONGS" / "Buscando SHORTS" / "Neutral"). No es una señal de entrada, es contexto.</p>
+      </div>
+
+      <div class="read-step">
+        <h4>LA VISIÓN DEL ORÁCULO — Contexto multi-timeframe</h4>
+        <p>Una tabla con 4 filas (tu TF, 4H, 1D, 1W) y columnas para divergencia regular + las 4 variantes del Moái. Los colores indican frescura: verde = señal reciente, amarillo = vigente, naranja = vieja, rojo = expirada. Ideal: que el Moái aparezca en múltiples temporalidades al mismo tiempo.</p>
+      </div>
+
+      <div class="read-step">
+        <h4>ORÁCULO PERFORMANCE — ¿Funciona aquí?</h4>
+        <p>Muestra cuántas señales históricas de cada variante tuvieron barras alcistas posteriores y cuál fue el retorno promedio. Si la Variante C tuvo 70% de barras alcistas en las próximas 10 velas → es una buena señal de que esa variante tiene edge en ese activo y TF.</p>
+      </div>
+
+      <div class="read-step">
+        <h4>El semáforo de colores en el Oráculo MTF</h4>
+        <p>Verde = señal de hace 1-5 velas (fresca, todavía vigente). Amarillo = 6-15 velas (vigente pero no tan reciente). Naranja = 16-30 velas (vieja, tomala con precaución). Rojo = más de 30 velas (expirada, ignorala). Estos límites son configurables.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- TEMPORALIDADES -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">04</span>
-      <h2>Temporalidad ideal</h2>
-      <div class="section-line"></div>
+  <div class="section">
+    <div class="section-label">¿Cuándo usarlo?</div>
+    <div class="section-title">Temporalidades recomendadas</div>
+
+    <div class="tf-cards">
+      <div class="tf-card">
+        <div class="tf-label">1H</div>
+        <span class="tf-badge tf-ideal">✓ IDEAL</span>
+        <p>Perfecto para swing trading con ejecución manual durante la sesión de NY. El Moái llega con unas 5 horas de retraso respecto al pivot real, lo que es manejable. Genera suficientes señales para tener datos estadísticos válidos.</p>
+      </div>
+
+      <div class="tf-card">
+        <div class="tf-label">4H</div>
+        <span class="tf-badge tf-ideal">✓ IDEAL</span>
+        <p>Señales más filtradas y más confiables que en 1H. El retraso es de ~20 horas, pero en swing trading eso no importa demasiado. Menos señales, pero de mayor calidad. Excelente para confirmar setups del 1H.</p>
+      </div>
+
+      <div class="tf-card">
+        <div class="tf-label">1D</div>
+        <span class="tf-badge tf-ok">~ ÚTIL COMO CONTEXTO</span>
+        <p>Muy pocas señales al año. Útil para saber hacia dónde va la tendencia macro y validar que el Moái en 1H está a favor del mercado diario. No usar como temporalidad principal de entrada.</p>
+      </div>
+
+      <div class="tf-card">
+        <div class="tf-label">15m</div>
+        <span class="tf-badge tf-no">✗ EVITAR</span>
+        <p>Demasiado ruido. Los pivots se confirman con retraso de 2.5 horas y cualquier movimiento aleatorio del precio puede generar divergencias falsas. Las señales en 15m tienen muy baja confiabilidad con este indicador.</p>
+      </div>
+
+      <div class="tf-card">
+        <div class="tf-label">5m ↓</div>
+        <span class="tf-badge tf-no">✗ NO USAR</span>
+        <p>Este indicador no fue diseñado para scalping. En 5 minutos o menos, los pivots no representan estructura real de mercado. Solo generaría falsas señales y confusión.</p>
+      </div>
     </div>
+  </div>
 
-    <div class="tf-table-wrap">
-      <table class="tf-table">
-        <thead>
-          <tr>
-            <th>Timeframe</th>
-            <th>Evaluación</th>
-            <th>Razonamiento</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td><strong>4H</strong></td>
-            <td><span class="badge badge-ideal">IDEAL</span></td>
-            <td>Equilibrio óptimo entre calidad de pivots y lag asumible. Los 5+5 barras de confirmación = ~40H, lo que para swing trading es manejable. Genera suficientes señales sin ser ruido.</td>
-          </tr>
-
-          <tr>
-            <td><strong>1H</strong></td>
-            <td><span class="badge badge-ideal">IDEAL</span></td>
-            <td>Tu timeframe de trabajo declarado. Los pivots tardan ~10H en confirmarse. Correcto para ejecución manual durante sesión NY. La ventana de 30 barras de divergencia = 30H de vigencia.</td>
-          </tr>
-
-          <tr>
-            <td><strong>1D</strong></td>
-            <td><span class="badge badge-ok">VÁLIDO</span></td>
-            <td>Útil para contexto y dirección macro. El MTF dashboard lo incorpora automáticamente. Como timeframe primario de señal, genera muy pocas señales por año.</td>
-          </tr>
-
-          <tr>
-            <td><strong>15m</strong></td>
-            <td><span class="badge badge-no">EVITAR</span></td>
-            <td>Con 5+5 barras de pivots, el lag es de 2.5H. Para intraday pierdes demasiada reactividad. Las divergencias en 15m tienen un ratio señal/ruido pésimo. No es tu estilo declarado tampoco.</td>
-          </tr>
-
-          <tr>
-            <td><strong>5m o menos</strong></td>
-            <td><span class="badge badge-no">NO USAR</span></td>
-            <td>El indicador no está diseñado para esto. Los pivots requieren estructura real. En 5m cualquier vela ruidosa puede crear un pivot falso y disparar una confluencia sin valor.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- PROS -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">05</span>
-      <h2>Pros y contras</h2>
-      <div class="section-line"></div>
-    </div>
+  <!-- PROS Y CONTRAS -->
+  <div class="section">
+    <div class="section-label">Balance objetivo</div>
+    <div class="section-title">Lo bueno y lo que hay que saber</div>
 
     <div class="pros-cons">
       <div class="pros-block">
-        <div class="block-title">// PROS</div>
-
+        <div class="block-title">✓ Lo que hace bien</div>
         <ul class="item-list">
-          <li><strong>Confluencia dual como filtro:</strong> exigir RSI + MACD simultáneos reduce las señales falsas respecto a usar uno solo.</li>
-          <li><strong>4 variantes de señal:</strong> te permite elegir entre agresividad (Base) y conservadurismo (A/B/C) según el régimen.</li>
-          <li><strong>Sin lookahead:</strong> el uso correcto de <code>barmerge.lookahead_off</code> elimina el repainting en MTF, lo cual es crítico.</li>
-          <li><strong>Performance tracker integrado:</strong> te permite validar empíricamente si la señal funciona en el activo y TF que estás usando.</li>
-          <li><strong>Clasificador de régimen:</strong> 14 estados son granulares sin ser paralizantes. Útil para el Strategy Bias.</li>
-          <li><strong>Código limpio y bien estructurado:</strong> comentado, con funciones separadas, sin parches encimados.</li>
-          <li><strong>Alertas configuradas:</strong> listo para ejecución manual sin modificaciones adicionales.</li>
+          <li><strong>Filtra el ruido:</strong> al exigir que RSI y MACD coincidan, evita muchas señales falsas que uno solo generaría.</li>
+          <li><strong>Cuatro variantes de señal:</strong> podés elegir cuán estricto querés ser según tu perfil de riesgo.</li>
+          <li><strong>Sin repainting en MTF:</strong> las señales que ves no van a desaparecer ni cambiar una vez confirmadas. Lo que ves es real.</li>
+          <li><strong>Performance tracker:</strong> te dice si el indicador "funciona" en el activo que estás usando, antes de operar en real.</li>
+          <li><strong>Contexto de régimen:</strong> el clasificador de mercado ayuda a no operar longs en medio de una tendencia bajista fuerte.</li>
+          <li><strong>Alertas incluidas:</strong> podés configurar notificaciones sin modificar el código.</li>
         </ul>
       </div>
 
       <div class="cons-block">
-        <div class="block-title">// CONTRAS</div>
-
+        <div class="block-title">✗ Lo que hay que tener en cuenta</div>
         <ul class="item-list">
-          <li><strong>Lag estructural de pivots:</strong> las señales llegan con 5 velas de retraso mínimo. En 1H son 5 horas después del pivot real. El precio ya se movió.</li>
-          <li><strong>Solo long por diseño:</strong> el Moái y todas las variantes están orientados exclusivamente a señales alcistas. Para shorts no hay señal visual equivalente.</li>
-          <li><strong>Ventana de divergencia arbitraria:</strong> los 30 barras default de lookback son un parámetro sin fundamento cuantitativo. Dos divergencias separadas por 31 barras se tratan diferente a dos separadas por 29.</li>
-          <li><strong>Performance tracker con sesgo de look-ahead en barras finales:</strong> las últimas N barras de historia no tienen ventana completada y se excluyen, lo cual es correcto pero reduce la muestra estadística.</li>
-          <li><strong>Régimen de mercado no validado:</strong> la clasificación en 14 estados es heurística. No hay evidencia de que "Acumulación" prediga lo que el indicador dice que predice.</li>
-          <li><strong>Sin señales short:</strong> para tu operativa de futuros que incluye shorts, necesitás un segundo sistema o complementarlo con otro indicador.</li>
-          <li><strong>Muchas variables simultáneas:</strong> con 4 variantes + 4 TFs + régimen, el riesgo de data snooping al optimizar es alto si no separás muestra in-sample / out-of-sample.</li>
+          <li><strong>Solo señales de compra (long):</strong> el Moái solo detecta setups alcistas. No tiene señales equivalentes para vender en corto.</li>
+          <li><strong>Llega tarde:</strong> por cómo funciona la confirmación de pivots, la señal aparece 5 velas después del mínimo real. En ese momento, parte del movimiento ya ocurrió.</li>
+          <li><strong>No incluye gestión de riesgo:</strong> el indicador no dice dónde poner el stop loss ni el take profit. Eso queda 100% de tu lado.</li>
+          <li><strong>No es suficiente solo:</strong> una confluencia de divergencias no garantiza nada. Necesitás contexto adicional y gestión de riesgo propia.</li>
+          <li><strong>Muchos dashboards:</strong> puede ser abrumador al principio. Empezá mirando solo el Confluence y el Moái, e incorporá los demás de a poco.</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- VEREDICTO -->
-  <section>
-    <div class="section-header">
-      <span class="section-num">06</span>
-      <h2>Veredicto técnico</h2>
-      <div class="section-line"></div>
-    </div>
+  <!-- VEREDICTO FINAL -->
+  <div class="section">
+    <div class="section-label">Conclusión</div>
+    <div class="section-title">¿Para quién es este indicador?</div>
 
-    <div class="verdict-box">
+    <div class="verdict">
+      <h3>Veredicto honesto</h3>
       <p>
-        Es un indicador <strong>bien construido técnicamente</strong>. El código no tiene errores obvios de repainting en MTF, la lógica de pivots es estándar y confiable, y el performance tracker está bien diseñado para evaluar señales históricas completadas. No es un script de humo.
+        El Oráculo de Bloomsbury es una herramienta <strong>bien construida y honesta</strong>. No promete más de lo que puede dar, y el performance tracker te permite verificar vos mismo si funciona en el activo que te interesa antes de arriesgar capital real.
+      </p>
+      <p>
+        Es un indicador pensado para <strong>swing traders que operan 1H y 4H</strong>, que quieren una señal visual clara de cuándo el momentum podría estar cambiando a favor del precio. No reemplaza el análisis de precio ni la gestión de riesgo — los complementa.
+      </p>
+      <p>
+        Lo más importante que tenés que entender: <strong>el Moái es el inicio del análisis, no el final.</strong> Cuando aparece, es tu señal para prestar atención y evaluar si todo lo demás también acompaña — el contexto de la tendencia mayor, el nivel de soporte, el volumen. Si todo encaja, entonces es momento de considerar la entrada.
       </p>
 
-      <p>
-        El problema central no es el código — es la hipótesis. <strong>La confluencia RSI + MACD en divergencia es una condición necesaria pero no suficiente para entrada.</strong> La señal base (sin filtros) en 1H o 4H probablemente tenga win rate en torno al 50-55% en activos tendenciales. Los filtros A/B/C reducen señales y pueden mejorar ese ratio, pero necesitás validarlo con el performance tracker en al menos 50 señales por variante antes de operar en real.
-      </p>
-
-      <p>
-        Para tu operativa específica (futuros perpetuos, swing, con shorts), <strong>este indicador solo cubre la mitad del trabajo</strong>: el lado alcista. Necesitás una contrapartida para shorts o usarlo exclusivamente como filtro de contexto y no como señal de entrada standalone.
-      </p>
-
-      <div class="verdict-highlight">
-        → Uso recomendado: <strong>filtro de contexto + timing de entrada</strong> sobre señales generadas por otro sistema con gestión de riesgo propia. No operar el Moái solo sin stop loss basado en ATR o estructura. El indicador no incluye gestión de posición.
+      <div class="verdict-tip">
+        💡 <strong>Consejo práctico para empezar:</strong> Cargalo en 1H sobre un activo que conozcás bien. Activá solo la Variante C. Mirá el Performance Tracker durante 2 semanas sin operar. Cuando tengas al menos 20 señales históricas analizadas en ese activo, recién ahí considerá incorporarlo a tu operativa real.
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="sep"></div>
 
   <footer>
-    DIAGNÓSTICO TÉCNICO — EL ORÁCULO DE BLOOMSBURY — Pine Script v6 // elias515
+    El Oráculo de Bloomsbury — Pine Script v6 // elias515 &nbsp;·&nbsp; Guía elaborada para traders en formación
   </footer>
 
 </div>
+
 </body>
 </html>
